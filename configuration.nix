@@ -69,10 +69,21 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    git
+    firefox
+    tilix
+    gnome-menus
+    gnomeExtensions.arcmenu
+    jdk21
+    pavucontrol
+    androidStudioPackages.beta
+    jetbrains.idea-ultimate
+    maven
+    gradle
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
