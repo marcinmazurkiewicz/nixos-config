@@ -5,9 +5,16 @@
 { config, lib, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      # Add additional package names here
+      "android-studio-beta"
+      "idea-ultimate"
+    ];
+    
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -58,17 +65,17 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
-  # };
+  users.users.m2 = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; 
+    shell = pkgs.zsh;
+    packages = with pkgs; [
+    ];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+ 
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -83,7 +90,19 @@
     jetbrains.idea-ultimate
     maven
     gradle
+    zsh
   ];
+
+  programs.zsh = {
+    enable = true;
+    shellAliases = {
+      ll = "ls -l";
+      rm = "rm -i";
+      update = "sudo nixos-rebuild switch";
+    };
+    
+    histSize = 10000;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
