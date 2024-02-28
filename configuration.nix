@@ -84,6 +84,7 @@
     tilix
     gnome-menus
     gnomeExtensions.arcmenu
+    gnomeExtensions.dash-to-dock
     jdk21
     pavucontrol
     androidStudioPackages.beta
