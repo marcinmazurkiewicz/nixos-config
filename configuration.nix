@@ -106,6 +106,8 @@
     builtins.elem (lib.getName pkg) [
       "android-studio-beta"
       "idea-ultimate"
+      "vscode"
+      "vscode-with-extensions"
     ];
 
   # List packages installed in system profile. To search, run:
@@ -133,6 +135,11 @@
     hunspellDicts.en_US
     zsh-powerlevel10k
     meslo-lgs-nf
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        ritwickdey.liveserver
+      ];
+    })
   ];
 
   programs.zsh = {
