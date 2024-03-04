@@ -90,7 +90,7 @@
   users.users.m2 = {
     isNormalUser = true;
     description = "m2";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     shell = pkgs.zsh;
     packages = with pkgs; [
     ];
@@ -115,6 +115,12 @@
         };
       };
     };
+  };
+
+  # Docker
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
   };
 
   # Allow unfree packages
