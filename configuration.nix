@@ -97,8 +97,23 @@
   };
   
   home-manager.useGlobalPkgs = true;
+  
   home-manager.users.m2 = { pkgs, ... }: {
     home.stateVersion = "23.11";
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/shell" = {
+          disable-user-extensions = false;
+          enabled-extensions = [
+            "dash-to-dock@micxgx.gmail.com"
+            "arcmenu@arcmenu.com"
+            "tactile@lundal.io"
+          ];
+        };
+      };
+    };
   };
 
   # Allow unfree packages
@@ -121,6 +136,8 @@
     gnome-menus
     gnomeExtensions.arcmenu
     gnomeExtensions.dash-to-dock
+    gnomeExtensions.tactile
+    gnome.dconf-editor
     jdk21
     pavucontrol
     androidStudioPackages.beta
@@ -138,6 +155,7 @@
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
         ritwickdey.liveserver
+        bbenoist.nix
       ];
     })
   ];
