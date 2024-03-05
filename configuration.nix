@@ -95,14 +95,41 @@
     packages = with pkgs; [
     ];
   };
-  
+
+  programs.zsh.enable = true;
+  programs.zsh.promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+
   home-manager.useGlobalPkgs = true;
   
   home-manager.users.m2 = { pkgs, ... }: {
     home.stateVersion = "23.11";
+    home.file.".p10k.zsh".source = ./dotfiles/p10k.zsh;
+    programs.zsh = {
+      enable = true;
+      shellAliases = {
+        ll = "ls -l";
+        rm = "rm -i";
+        update = "sudo nixos-rebuild switch";
+      };
+      autocd = false;
+      defaultKeymap = "emacs";
+      history = {
+        path = "$HOME/.history";
+        size = 10000;
+        save = 10000;
+      };
+
+      initExtra = ''
+        unsetopt beep notify
+
+        [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
+      '';
+    };
+
     dconf = {
       enable = true;
       settings = {
+        "com/gexperts/Tilix".theme-variant = "dark";
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
         "org/gnome/desktop/wm/preferences".button-layout = "appmenu:minimize,maximize,close";
         "org/gnome/shell" = {
@@ -111,6 +138,7 @@
             "dash-to-dock@micxgx.gmail.com"
             "arcmenu@arcmenu.com"
             "tactile@lundal.io"
+            "trayIconsReloaded@selfmade.pl"
           ];
         };
       };
@@ -132,7 +160,13 @@
       "vscode-with-extensions"
       "skypeforlinux"
       "discord"
+      "postman"
+      "google-chrome"
     ];
+
+  fonts.packages = with pkgs; [
+    meslo-lgs-nf
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -163,6 +197,11 @@
     zsh-powerlevel10k
     skypeforlinux
     discord
+    openvpn
+    # postman
+    glogg
+    meld
+    google-chrome
     meslo-lgs-nf
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
@@ -172,16 +211,7 @@
     })
   ];
 
-  programs.zsh = {
-    enable = true;
-    shellAliases = {
-      ll = "ls -l";
-      rm = "rm -i";
-      update = "sudo nixos-rebuild switch";
-    };
-    promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-    histSize = 10000;
-  };
+ 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
