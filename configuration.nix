@@ -130,6 +130,8 @@
       "idea-ultimate"
       "vscode"
       "vscode-with-extensions"
+      "skypeforlinux"
+      "discord"
     ];
 
   # List packages installed in system profile. To search, run:
@@ -144,6 +146,7 @@
     gnomeExtensions.arcmenu
     gnomeExtensions.dash-to-dock
     gnomeExtensions.tactile
+    gnomeExtensions.tray-icons-reloaded
     gnome.dconf-editor
     jdk21
     pavucontrol
@@ -158,6 +161,8 @@
     hunspellDicts.pl_PL
     hunspellDicts.en_US
     zsh-powerlevel10k
+    skypeforlinux
+    discord
     meslo-lgs-nf
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
