@@ -131,6 +131,13 @@
       settings = {
         "com/gexperts/Tilix".theme-variant = "dark";
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/desktop/peripherals/touchpad" = {
+          tap-to-click = true;
+          edge-scrolling-enabled = false;
+          two-finger-scrolling-enabled = true;
+          natural-scroll = false;
+        };
+
         "org/gnome/desktop/wm/preferences".button-layout = "appmenu:minimize,maximize,close";
         "org/gnome/shell" = {
           disable-user-extensions = false;
@@ -160,7 +167,6 @@
       "vscode-with-extensions"
       "skypeforlinux"
       "discord"
-      "postman"
       "google-chrome"
     ];
 
@@ -198,7 +204,6 @@
     skypeforlinux
     discord
     openvpn
-    # postman
     glogg
     meld
     google-chrome
