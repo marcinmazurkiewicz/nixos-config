@@ -8,17 +8,12 @@
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      /etc/nixos/machine-configuration.nix
       <home-manager/nixos>
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.initrd.luks.devices."luks-d711cc58-136e-4dba-85e1-226bf1cd7a1c".device = "/dev/disk/by-uuid/d711cc58-136e-4dba-85e1-226bf1cd7a1c";
-  networking.hostName = "m2-thinkbook"; # Define your hostname.
+  
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -147,16 +142,36 @@
             "tactile@lundal.io"
             "trayIconsReloaded@selfmade.pl"
           ];
+
+          favorite-apps = [
+            "firefox.desktop"
+            "org.gnome.Nautilus.desktop"
+            "code.desktop"
+            "com.gexperts.Tilix.desktop"
+            "idea-ultimate.desktop"
+            "google-chrome.desktop"
+            "discord.desktop"
+          ];
+        };
+
+        "org/gnome/shell/extensions/dash-to-dock" = {
+          dock-fixed = true;
+          extend-height = true;
+          dock-position = "LEFT";
+          multi-monitor = true;
+          custom-theme-shrink = true;
+        };
+
+         "org/gnome/shell/extensions/tactile" = {
+            col-3 = 0;
+            row-1 = 0;
         };
       };
     };
   };
 
   # Docker
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
+  virtualisation.docker.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfreePredicate = pkg:
