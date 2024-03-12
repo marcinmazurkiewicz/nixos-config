@@ -148,6 +148,7 @@
 
         "org/gnome/desktop/wm/preferences".button-layout = "appmenu:minimize,maximize,close";
         "org/gnome/shell" = {
+          last-selected-power-profile = "performance";
           disable-user-extensions = false;
           enabled-extensions = [
             "dash-to-dock@micxgx.gmail.com"
